@@ -1,8 +1,13 @@
+import "./App.css"
+import Header from "./components/Header"
 const App = () => {
 
   return (
     <>
-    <h1>کاتالوگ فست فود</h1>
+<div className="wrapper bg-faded-dark">
+<Header/>
+</div>
+    
     </>
   )
 }
