@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import axios from "../axios";
 import Loading from "./Loading";
 import LoadingPiulse from "./LoadingPulse";
+import SearchBar from "./SearchBar";
 
-const CategoryList = () => {
+const CategoryList = ({ filterItems, children }) => {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -17,25 +18,32 @@ const CategoryList = () => {
 
   const RenderComponent = () => {
     if (loading) {
-      return <Loading theme="primary"/>;
+      return <Loading theme="primary" />;
     } else {
       return (
-        <ul className="nav">
-          <li className="nav-item flex  ">
-            <a className="nav-link" href="#">
-              همه فست فود ها
-            </a>
-          </li>
-          {categories.map((category) => {
-            return (
-              <li key={category.id} className="nav-item  ">
-                <a className=" nav-link" href="#">
-                  {category.name}
-                </a>
-              </li>
-            );
-          })}
-        </ul>
+        <div className="flex  w-full items-baseline justify-between ml-[40px] ">
+          <ul className="nav">
+            <li className="nav-item flex  " onClick={() => filterItems()}>
+              <a className="nav-link" href="#">
+                همه فست فود ها
+              </a>
+            </li>
+            {categories.map((category) => {
+              return (
+                <li
+                  key={category.id}
+                  className="nav-item"
+                  onClick={() => filterItems(category.id)}
+                >
+                  <a className=" nav-link" href="#">
+                    {category.name}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+          {children}
+        </div>
       );
     }
   };

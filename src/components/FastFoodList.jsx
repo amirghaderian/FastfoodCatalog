@@ -1,7 +1,15 @@
-const FastFoodList = ({FastFoodItems}) => {
-  return (
-    <div className="">Fast Food Items  </div>
-  )
-}
+import FastFoodItem from "./fastFoodItem/FastFoodItem";
 
-export default FastFoodList
+const FastFoodList = ({ fastFoodItems }) => {
+  return (
+    <div className="row">
+      {fastFoodItems.map((fastFood) => {
+        return <div className="col-md-4 col-sm-6 mb-grid-gutter" key={fastFood.id}>
+          <FastFoodItem {...fastFood}/>
+        </div>;
+      })}{" "}
+    </div>
+  );
+};
+
+export default FastFoodList;
